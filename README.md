@@ -21,19 +21,7 @@ main subproblems:
 ## Data
 
 The given preprocessed dataset had the following properties:
-
-```
-Dataset Size Avg Source Length Avg Target Length
-```
-```
-Train 105 5012 164
-```
-```
-Validation 17 4921 149
-```
-```
-Test 20 4833 155
-```
+![Screenshot](docs/data_table.JPG)
 As we can see the average source length is about 4times larger than the input
 sequence limit of any standard summarization model.The average target length
 
