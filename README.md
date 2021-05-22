@@ -80,7 +80,8 @@ model.
 
 ![Screenshot](docs/results_table.JPG)
 
-Observations-
+## Observations-
+
 ● There is a problem of truncation with each of themodels, in the sense that the
 last sentence is abruptly ended before the end ofsentence token is reached.
 This issue was noticed only when training in batchesof >1 but not when batch
@@ -88,15 +89,12 @@ size was 1. I was unable to solve this issue due towhich the trailing incomplete
 sentence was discarded. This led to some loss of informationfrom the final
 summary which reduced the final rouge scores.
 
-
-```
 ● As the model was trained for more epochs it adopted the structure of the
 ground truth summary better, however with further training it started to
 discard unique information from the source and learnedto output very similar
 summaries which were structurally very sound butpoor in their quality of
 content. Hence I found 5 epochs to be the sweet spotfor fine tuning.
-```
-```
+
 ● Since these models are extremely large and have beentrained on billions of
 lines of text data, it requires a large amount ofdata to effectively finetune all
 the weights of the model and multiple gpus to trainthe entire model at the
@@ -109,59 +107,42 @@ me to load the model and train with a batch size of4 whereas without
 freezing allowed only a batch size of 1. A model trainedon batch size of 1
 showed a lot of variation in its test results andgenerated rather short
 summaries with not a lot of information.
-```
-Training Hyperparameter choices :
 
-```
+## Training Hyperparameter choices :
+
 ● A batch size of 4 (with encoder weights frozen) wasused as this was the
 highest achievable considering that I was using thefree gpu on colab.
-```
-```
+
 ● Training was done for 5 epochs for the reason listedabove in the observations.
-```
-```
+
 ● The inputs were padded/truncated upto the maximumlength to allow batch
 training to happen. The maximum input length was 1024,which is pretty
 standard, whereas the maximum output length was 180.This is slightly higher
 than the ground truth summaries, however I noticedthat all 3 models provide
 rather short summaries and since the last sentenceis discarded due to the
 truncation problem I added about a sentence’s lengthto the maximum limit.
-```
-Decoding Hyperparameter choices :
 
-```
+## Decoding Hyperparameter choices :
+
 ● Due to the fact that the input was largely conversational,there is a lot of
 repetition of phrases which leads to an assignmentof a high importance to
 them due to the high frequency of occurrence. Thisled to some phrases being
 repeated in the decoded summary hence, the no_repeat_ngram_sizewas set
 to 3. In general, conditional generation models sufferfrom repetition and this
 hyperparam counteracts that.
-```
 
-```
 ● I set top_p to 0.9 and top_k to 15 to prevent complete greedy decoding while
 the model is creating the summary and to get morecomprehensive
 summaries.
-```
-```
+
 ● The forced_eos_token_id was set to true to force thesummary to produce the
 eos token once the max length is reached, howeverthis does not solve the
 truncation problem.
-```
+
 ## Conclusion
 
 Hence an effective abstractive summarizer called bart-largewith a preprocessing
 pipeline which employs an extractive summarizer fromgensim was fine tuned on
 the ami dataset to achieve close to SOTA results.The final rouge scores obtained
 were -
-
-```
-Dataset Rouge^1 Rouge^2 RougeL
-```
-```
-Test 47. 28 17. 25 26. 40
-```
-```
-Val 45. 79 15. 83 24. 27
-```
-
+![Screenshot](docs/best_table.JPG)
