@@ -22,6 +22,7 @@ main subproblems:
 
 The given preprocessed dataset had the following properties:
 ![Screenshot](docs/data_table.JPG)
+
 As we can see the average source length is about 4times larger than the input
 sequence limit of any standard summarization model.The average target length
 
