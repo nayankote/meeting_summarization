@@ -78,63 +78,8 @@ model based on the scoring criteria was the bart-large.In addition I used the
 meeting summarization model HMNet (microsoft) as agoal for the summarization
 model.
 
-```
-Model Dataset Rouge 1 Rouge 2 RougeL
-```
-```
-bart-base Test 38.47 10.24 21.
-```
-```
-Val 36.99 9.04 20.
-```
-```
-bart-large Test^47.^2817.^2526.^40
-```
-```
-Val 45. 79 15. 83 24. 27
-```
-```
-bart-large-
-cnn
-```
-```
-Test 46.86 16.61 25.
-```
-```
-Val 45.41 15.89 24.
-```
-```
-t 5 - base Test 17.18 3.01 11.
-```
-```
-Val 18.33 3.73 12.
-```
-```
-t 5 - large Test 16.78 2.75 10.
-```
-```
-Val 18.84 3.81 12.
-```
-```
-pegasus-
-arxiv
-```
-```
-Test 27.66 6.03 16.
-```
-```
-Val 26.15 5.82 15.
-```
-```
-pegasus-
-large
-```
-```
-Test 20.12 2.65 12.
-```
-```
-Val 21.96 3.41 12.
-```
+![Screenshot](docs/results_table.JPG)
+
 Observations-
 ● There is a problem of truncation with each of themodels, in the sense that the
 last sentence is abruptly ended before the end ofsentence token is reached.
